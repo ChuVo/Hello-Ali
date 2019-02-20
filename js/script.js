@@ -49,3 +49,17 @@ window.addEventListener('DOMContentLoaded', () => {
             removeFromCart();
         });
     });
+
+    function sliceTitle() {
+        titles.forEach(function(item) {
+            if (item.textContent.length < 70 ) {
+                return;
+            } else {
+                // const str = item.textContent.slice(0, 71) + '...';//возвращает первые 69 сммволоа
+                const str = `${item.textContent.slice(0, 71)}...`;
+                item.textContent = str;
+            }
+        });
+    }
+
+    sliceTitle();
