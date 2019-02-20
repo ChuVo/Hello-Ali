@@ -54,8 +54,8 @@ window.addEventListener('DOMContentLoaded', () => {
             if (item.textContent.length < 70 ) {
                 return;
             } else {
-                // const str = item.textContent.slice(0, 71) + '...';//возвращает первые 69 сммволоа
-                const str = `${item.textContent.slice(0, 71)}...`;
+                // const str = item.textContent.slice(0, 70) + '...';//возвращает первые 69 сммволоа
+                const str = `${item.textContent.slice(0, 70)}...`;
                 item.textContent = str;
             }
         });
@@ -110,3 +110,41 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+const loadContent = (url) => {
+    fetch(url)
+        .then(response => response.json())
+        .then(json => createElement(json));
+}
+
+function createElement(arr) {//добавляет элементы продуктов из базы данных db.js
+    const goodsWrapper = document.querySelector('.goods__Wrapper');
+
+    arr.forEach(function(item) {
+        let card = document.createElement('div');
+        card.classList.add('goods__item');
+        card.innerHTML = `
+            <img class="goods__img" src="${item.url}" alt="phone">
+            <div class="goods__colors">Доступно цветов: 4</div>
+            <div class="goods__title">
+                ${item.title} 
+            </div>
+            <div class="goods__price">
+                <span>${item.price}</span> руб/шт
+            </div>
+            <button class="goods__btn">Добавить в корзину</button>
+        `;
+        goodsWrapper.appendChild(card);
+    });
+}
+
+loadContent('https://jsonplaceholder.typicode.com/posts');
+// const example = {username: 'Hello'};
+
+// fetch('https://jsonplaceholder.typicode.com/posts',//пример fetch запроса с методом POST(отправка данных)
+//     {
+//         method: "POST",
+//         body: JSON.stringify(example)
+//     })
+//   .then(response => response.json())
+//   .then(json => console.log(json))
