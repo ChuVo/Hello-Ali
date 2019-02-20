@@ -32,9 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 removeBtn = document.createElement('div');
                 
             trigger.remove();
-
-            showConfirm();
-            calcGoods(1);
+            showConfirm();            
 
             removeBtn.classList.add('goods__item-remove');
             removeBtn.innerHTML = '&times';
@@ -45,6 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 empty.remove();
             }
 
+            calcGoods();
             calcTotal();
             removeFromCart();
         });
@@ -81,9 +80,9 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function calcGoods(i) {
+    function calcGoods() {
         const items = cartWrapper.querySelectorAll('.goods__item');
-        badge.textContent = i + items.length;        
+        badge.textContent = items.length;        
     }
 
     function calcTotal() {
@@ -105,7 +104,7 @@ window.addEventListener('DOMContentLoaded', () => {
         removeBtn.forEach(function (btn) {
             btn.addEventListener('click', () => {
                 btn.parentElement.remove();
-                calcGoods(0);
+                calcGoods();
                 calcTotal();
             });
         });
